@@ -7,12 +7,10 @@ async function fetchInstagramPosts() {
         // Affichage des publications Instagram dans le DOM
         const postsContainer = document.getElementById('postsContainer');
         postsContainer.innerHTML = posts.map(post => `
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="${post.media_url}" class="card-img-top" alt="Instagram post">
-                    <div class="card-body">
-                        <p class="card-text">${post.caption}</p>
-                    </div>
+            <div class="card" onclick="window.open('${post.permalink}', '_blank')">
+                <img src="${post.media_url}" class="card-img-top" alt="Instagram post">
+                <div class="card-body">
+                    <p class="card-text truncate">${post.caption}</p>
                 </div>
             </div>
         `).join('');
