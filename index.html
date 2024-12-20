@@ -67,7 +67,7 @@
                         <a class="nav-link" href="#gallerie">Gallerie</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -104,8 +104,8 @@
     <section id="evenements"
         class="container-fluid display-flex flex-column justify-content-center align-items-center py-5">
         <h2 class="text-center">Nos événements</h2>
-        <div class="row" id="evenementsContainer">
-            <!-- Les cartes des événements seront insérées ici -->
+        <div id="postsContainer" class="row g-4">
+            <!-- Les publications Instagram seront insérées ici -->
         </div>
     </section>
 
@@ -155,10 +155,9 @@
         </form>
     </section>
 
-    <footer class="container-fluid bg-body-secondary text-light text-center py-3">
-        <p>Club d'oenologie INSA Lyon - Tous droits réservés</p>
+    <footer class="container-fluid bg-body-secondary text-dark text-center py-3">
+        Club d'oenologie INSA Lyon - Tous droits réservés
     </footer>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -166,7 +165,32 @@
         crossorigin="anonymous"></script>
 
     <script>
+        // Fonction pour récupérer et afficher les posts Instagram
+        async function fetchInstagramPosts() {
+            try {
+                const response = await fetch('./data.json'); // Chargement du fichier JSON
+                const posts = await response.json();
+
+                const postsContainer = document.getElementById('postsContainer');
+                postsContainer.innerHTML = posts.map(post => `
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="${post.imageUrl}" class="card-img-top" alt="Instagram post">
+                            <div class="card-body">
+                                <p class="card-text">${post.caption}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error("Erreur lors du chargement des publications Instagram :", error);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
+
+            fetchInstagramPosts();
+
             const navbar = document.getElementById("navbar");
 
             window.addEventListener("scroll", function () {
@@ -184,6 +208,8 @@
         });
 
     </script>
+    <script src="script.js"></script>
+
 </body>
 
 </html>
