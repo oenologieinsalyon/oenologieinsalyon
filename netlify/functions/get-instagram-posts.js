@@ -1,5 +1,3 @@
-const fetch = require('node-fetch'); // Cette ligne est implicite, car Netlify fournit fetch pour les fonctions.
-
 exports.handler = async function(event, context) {
     const token = process.env.IG_TOKEN; // Récupère le token stocké dans les variables d'environnement Netlify
 
