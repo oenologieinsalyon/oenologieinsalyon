@@ -15,7 +15,7 @@
 }
 
 #evenements {
-    height: 100vh;
+    min-height: 100vh;
     padding-top: 7rem;
 }
 
@@ -28,7 +28,7 @@
 }
 
 #postsContainer .card {
-    max-width: 300px;
+    max-width: 350px;
     max-height: 500px;
     display: flex;
     flex-direction: column;
@@ -36,6 +36,16 @@
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#postsContainer .card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    cursor: pointer;
 }
 
 #postsContainer .card .card-body .card-text.truncate {
