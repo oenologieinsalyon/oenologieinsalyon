@@ -11,6 +11,11 @@ exports.handler = async function(event, context) {
 
         return {
             statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*', // Permet toutes les origines
+                'Access-Control-Allow-Methods': 'GET', // Autorise la méthode GET
+                'Access-Control-Allow-Headers': 'Content-Type', // Autorise le Content-Type dans les en-têtes
+            },
             body: JSON.stringify(instagramData.data), // Retourne uniquement les données des posts
         };
     } catch (error) {
