@@ -8,6 +8,7 @@
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
 }
 
 #home {
@@ -29,10 +30,6 @@
 #concours {
     min-height: 100vh;
     padding-top: 7rem;
-}
-
-#contact {
-    height: 50vh;
 }
 
 #eventsContainer .card {

@@ -52,6 +52,8 @@ async function fillCarousel(carouselId, posts) {
     // Récupère tous les médias
     const allMedia = await getAllMediaFromPosts(posts);
 
+    carouselTrack.innerHTML = '';
+    
     allMedia.forEach(media => {
         carouselTrack.appendChild(generateMediaCard(media));
     });
