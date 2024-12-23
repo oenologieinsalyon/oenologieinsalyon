@@ -22,6 +22,8 @@
 #gallerie {
     min-height: 100vh;
     padding-top: 7rem;
+    background-color: #7d0217;
+    color: white;
 }
 
 #concours {
@@ -33,7 +35,7 @@
     height: 50vh;
 }
 
-#postsContainer .card {
+#eventsContainer .card {
     max-width: 350px;
     max-height: 500px;
     display: flex;
@@ -45,7 +47,7 @@
     overflow: hidden;
 }
 
-#postsContainer .card:hover {
+#eventsContainer .card:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transform: scale(1.05);
     -webkit-transform: scale(1.05);
@@ -55,7 +57,7 @@
     cursor: pointer;
 }
 
-#postsContainer .card .card-body .card-text.truncate {
+#eventsContainer .card .card-body .card-text.truncate {
     display: -webkit-box;
     -webkit-line-clamp: 3; 
     line-clamp: 3; 
@@ -64,72 +66,98 @@
     text-overflow: ellipsis;
 }
 
-#gallerie .card {
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+.carousel-container {
+    overflow: hidden; /* Masque les images en dehors de la vue */
+    position: relative;
+    width: 100%;
 }
 
-#gallerie .card:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
+.carousel-track {
+    transition: transform 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-track img {
+    flex: 0 0 auto; /* Images ne se réduisent pas */
+    width: 100%; /* Une image visible sur mobile */
+    border-radius: 1rem;
+    height: fit-content;
+}
+
+.carousel-track img:hover {
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
     cursor: pointer;
 }
 
-#gallerie .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
+.carousel-track video {
+    flex: 0 0 auto; /* Vidéos ne se réduisent pas */
+    width: 100%; /* Une vidéo visible sur mobile */
+    border-radius: 1rem;
+    height: fit-content;
 }
 
-#gallerie .card video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
-
-#concours .card {
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-}
-
-#concours .card:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
+.carousel-track video:hover {
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
     cursor: pointer;
 }
 
-#concours .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
+@media (min-width: 576px) {
+    .carousel-track img {
+        width: 50%; /* Deux images visibles sur tablette */
+    }
+    .carousel-track video {
+        width: 50%; /* Deux vidéos visibles sur tablette */
+    }
 }
 
-#concours .card video {
+@media (min-width: 768px) {
+    .carousel-track img {
+        width: 33.33%; /* Trois images visibles sur grand écran */
+    }
+    .carousel-track video {
+        width: 33.33%; /* Trois vidéos visibles sur grand écran */
+    }
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.lightbox .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.d-none {
+    display: none !important;
 }
