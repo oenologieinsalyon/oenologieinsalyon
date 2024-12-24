@@ -219,7 +219,7 @@ async function fetchInstagramPosts() {
         concoursPosts = allPosts.filter(post => {
             const caption = post.caption ? post.caption.toLowerCase() : '';
             return (
-                (caption.toLowerCase().includes("concours") || caption.toLowerCase().includes("trophée") || caption.toLowerCase().includes("équipe"))
+                (caption.toLowerCase().includes("concours") || caption.toLowerCase().includes("trophée") || caption.toLowerCase().includes("équipe")) && !caption.toLowerCase().includes("ag ")
             );
         });
 
