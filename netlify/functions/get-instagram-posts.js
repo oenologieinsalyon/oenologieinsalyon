@@ -1,8 +1,9 @@
 exports.handler = async function(event, context) {
     const token = process.env.IG_TOKEN; // Récupère le token stocké dans les variables d'environnement Netlify
-
     try {
         const instagramResponse = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${token}`);
+
+        console.log(instagramResponse);
         const instagramData = await instagramResponse.json();
 
         if (instagramData.error) {

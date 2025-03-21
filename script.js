@@ -199,7 +199,10 @@ function loadMoreEvents() {
 // Fonction principale pour récupérer et afficher les posts
 async function fetchInstagramPosts() {
     try {
+        // add CORS header to fetch request
         const response = await fetch('https://oenologieinsalyon.netlify.app/.netlify/functions/get-instagram-posts');
+
+        console.log(response);
         allPosts = await response.json(); // Stocker tous les posts dans la variable globale allPosts
 
         // Filtrer les posts pour les événements, concours et galerie
