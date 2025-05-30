@@ -30,7 +30,6 @@ exports.handler = async function (event, context) {
             body: JSON.stringify(data.data), // Retourne uniquement les données des médias
         };
     } catch (error) {
-        console.error("Erreur lors de l'appel à l'API Instagram:", error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: "Erreur lors de la récupération des médias" }),

@@ -6,7 +6,13 @@ let eventPosts = []; // Variable globale pour stocker les posts d'événements
 let galleriePosts = []; // Variable globale pour stocker les posts pour la galerie
 let concoursPosts = []; // Variable globale pour stocker les posts des concours
 
-
+// Fonction pour masquer les loaders
+function hideLoader(loaderId) {
+    const loader = document.getElementById(loaderId);
+    if (loader) {
+        loader.style.display = 'none';
+    }
+}
 
 async function fillEvents() {
     const eventsContainer = document.getElementById('eventsContainer');
@@ -15,11 +21,11 @@ async function fillEvents() {
 
     for (const post of eventPosts.slice(0, visiblePosts)) {
         eventsContent += `<div class="card" onclick="window.open('${post.permalink}', '_blank')">
-            <img src="${post.media_url}" class="card-img-top" alt="Instagram event">
-            <div class="card-body">
-                <p class="card-text truncate">${post.caption}</p>
-            </div>
-        </div>`;
+                    <img src="${post.media_url}" class="card-img-top" alt="Instagram event">
+                    <div class="card-body">
+                        <p class="card-text truncate">${post.caption}</p>
+                    </div>
+                </div>`;
     }
 
     eventsContainer.innerHTML = eventsContent;
@@ -27,6 +33,9 @@ async function fillEvents() {
     if (eventPosts.length === 0) {
         eventsContainer.innerHTML = `<p class="text-center">Aucun événement trouvé.</p>`;
     }
+
+    // Cacher le loader
+    hideLoader('instagramEventLoader');
 }
 
 async function getAllMediaFromPosts(posts) {
@@ -53,12 +62,19 @@ async function fillCarousel(carouselId, posts) {
     const allMedia = await getAllMediaFromPosts(posts);
 
     carouselTrack.innerHTML = '';
-    
+
     allMedia.forEach(media => {
         carouselTrack.appendChild(generateMediaCard(media));
     });
 
-    setupCarouselControls(carouselId); // Initialise les boutons
+    setupCarouselControls(carouselId);
+
+    // Cacher les loaders correspondants
+    if (carouselId === 'gallerieTrack') {
+        hideLoader('instagramGalleryLoader');
+    } else if (carouselId === 'contestTrack') {
+        hideLoader('instagramContestLoader');
+    }
 }
 
 function setupCarouselControls(carouselId, currentIndex = 0) {
@@ -118,7 +134,6 @@ function generateMediaCard(media) {
 }
 
 function displayInModal(media) {
-    console.log(media);
     const modalContent = document.getElementById('modalContent');
     const mediaModal = new bootstrap.Modal(document.getElementById('mediaModal'));
 
@@ -162,11 +177,9 @@ async function fetchAlbumMedia(mediaId) {
                 media_url: media.media_url,
             }));
         }
-
-        console.error("Le format des données récupérées n'est pas valide :", data);
         return [];
     } catch (error) {
-        console.error("Erreur lors de la récupération des médias de l'album :", error);
+        document.getElementById('eventsContainer').innerHTML = `<p class="text-center">Erreur lors de la récupération des médias de l'album.</p>`;
         return [];
     }
 }
@@ -202,7 +215,6 @@ async function fetchInstagramPosts() {
         // add CORS header to fetch request
         const response = await fetch('https://oenologieinsalyon.netlify.app/.netlify/functions/get-instagram-posts');
 
-        console.log(response);
         allPosts = await response.json(); // Stocker tous les posts dans la variable globale allPosts
 
         // Filtrer les posts pour les événements, concours et galerie
@@ -240,6 +252,6 @@ async function fetchInstagramPosts() {
         fillCarousel('concoursTrack', concoursPosts);
 
     } catch (error) {
-        console.error("Erreur lors du chargement des publications Instagram :", error);
+        document.getElementById('eventsContainer').innerHTML = `<p class="text-center">Erreur lors de la récupération des posts.</p>`;
     }
 }
