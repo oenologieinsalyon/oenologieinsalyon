@@ -26,7 +26,7 @@ async function fillEvents() {
         card.onclick = () => window.open(post.permalink, '_blank');
 
         card.innerHTML = `
-            <img src="${post.media_url}" class="w-full object-cover" alt="Instagram event">
+            <img src="${post.media_url}" class="w-full object-cover" alt="Instagram event" title="Voir l'événement sur Instagram">
             <div class="p-4">
                 <p class="text-gray-700 line-clamp-3 text-left">${post.caption || 'Aucun texte disponible'}</p>
             </div>`;
@@ -367,7 +367,7 @@ async function loadMoreEvents() {
             card.onclick = () => window.open(post.permalink, '_blank');
 
             card.innerHTML = `
-                <img src="${post.media_url}" class="w-full object-cover" alt="Instagram event">
+                <img src="${post.media_url}" class="w-full object-cover" alt="Instagram event" title="Voir l'événement sur Instagram">
                 <div class="p-4">
                     <p class="text-gray-700 line-clamp-3 text-left">${post.caption || 'Aucun texte disponible'}</p>
                 </div>`;
@@ -436,6 +436,7 @@ function generateMediaCard(media) {
         const img = document.createElement('img');
         img.className = "w-full h-auto object-cover aspect-square";
         img.alt = "Image du Club d'œnologie";
+        img.title = "Image du Club d'œnologie";
 
         const placeholder = document.createElement('div');
         placeholder.className = "absolute inset-0 bg-gray-200 animate-pulse lazy-placeholder";
@@ -463,6 +464,8 @@ function generateMediaCard(media) {
         const source = document.createElement('source');
         source.type = "video/mp4";
         source.src = media.media_url;
+        video.title = "Vidéo du Club d'œnologie";
+        video.alt = "Vidéo du Club d'œnologie";
         video.appendChild(source);
 
         const placeholder = document.createElement('div');
@@ -571,10 +574,11 @@ function displayInLightbox(media) {
 
     let content = '';
     if (media.media_type === "IMAGE") {
-        content = `<img src="${media.media_url}" class="max-w-[90%] max-h-[90vh] rounded-lg shadow-lg" alt="Aperçu">`;
+        content = `<img src="${media.media_url}" class="max-w-[90%] max-h-[90vh] rounded-lg shadow-lg" alt="Aperçu" title="Voir l'image en grand">`;
     } else if (media.media_type === "VIDEO") {
         content = `
-            <video src="${media.media_url}" class="max-w-[90%] max-h-[90vh] rounded-lg shadow-lg" controls autoplay></video>`;
+            <video src="${media.media_url}" class="max-w-[90%] max-h-[90vh] rounded-lg shadow-lg" controls autoplay title="Voir la vidéo en grand">
+            </video>`;
     }
 
     lightbox.innerHTML = `
