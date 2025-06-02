@@ -1,0 +1,19 @@
+# robots.txt pour oenologieinsalyon.fr
+User-agent: *
+Allow: /
+
+# Autorisation explicite pour les robots d'IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: GoogleBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Emplacement du sitemap
+Sitemap: https://oenologieinsalyon.fr/sitemap.xml
