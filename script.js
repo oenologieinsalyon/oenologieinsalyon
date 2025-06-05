@@ -152,7 +152,8 @@ function processInstagramPosts() {
         const isContest = (caption.includes("concours") ||
             caption.includes("trophée") ||
             caption.includes("équipe")) &&
-            !caption.includes("ag ");
+            !caption.includes("ag ") &&
+            !caption.includes("passation");
 
         if (isEvent) eventPosts.push(post);
         if (isGallery) galeriePosts.push(post);
